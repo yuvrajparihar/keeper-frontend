@@ -106,7 +106,7 @@ form.create-note button {
 
 .signin {
   background: #fff;
-  border-radius: 7px;
+  border-radius: 10px;
   box-shadow: 0 2px 5px #ccc;
   padding: 10px;
   width: 450px;
@@ -153,10 +153,17 @@ form.create-note button {
   font-size: 18px;
   margin-left: 65px;
   margin-bottom: 10px;
+  cursor: pointer;
+  
 }
+.signupbutton{
+  margin-top: 10px;
+}
+
 .button:hover{
   /* background-color: rgb(109, 109, 109); */
   color: #f5ba13;
+
 }
 .or {
   text-align: center;
@@ -186,6 +193,8 @@ img {
  
   margin-left: 31%;
   display: block;
+  cursor: pointer;
+  border: 0;
 
 }
 /* .google:hover{
@@ -213,3 +222,21 @@ img {
 /* .up{
   color: #fab801;
 } */
+
+.confirm{
+  margin-bottom: 2px;
+}
+.match{
+  margin-left: 66px;
+  color: red;
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+.mail{
+  margin-left: 82%;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 0;  
+  cursor: pointer;
+}

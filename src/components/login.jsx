@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { NavLink as Link } from "react-router-dom";
+import { NavLink as Link,useHistory} from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
 
 function Login(props) {
-  const [note, setNote] = useState({
+  
+  const [user, setNote] = useState({
     username: "",
     password: ""
   });
@@ -17,33 +20,50 @@ function Login(props) {
       };
     });
   }
+  const history = useHistory();
 
-  function submitNote(event) {
-    props.history.push("/signup")
-    // props.onAdd(note);
-    // setNote({
-    //   username: "",
-    // password: ""
-    // });
+  function signIn(event) {
+
     event.preventDefault();
+    fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({ email: user.username, password: user.password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const accessToken = data.token;
+         window.sessionStorage.setItem("jwtToken",accessToken);
+        history.push("/home");
+      });
   }
 
+ 
+
   return (
+    <div>
+    <Header />
     <div className="signin">
       <h3 className="sign">Sign In</h3>
       <form>
         <input name="username" onChange={handleChange} className="input" type="email" placeholder="Email" />
         <input name="password" onChange={handleChange} className="input" type="password" placeholder="Password" />
-        <button onClick={submitNote} className="button">Sign In</button>
+        <button onClick={signIn} className="button">Sign In</button>
       </form>
       <p className="or">or</p>
 
-      <Link to="/main">
-        <div className="google">
+        <a className="google" href="http://localhost:5000/auth/google"><div>
           <img className="x" src="google.png" alt="GOOGLE" />
           <p className="x bold"> Google</p>
-        </div>
-      </Link>
+        </div></a>
+
+       {/* <button className="google">  <div>
+          <img className="x" src="google.png" alt="GOOGLE" />
+          <p className="x bold"> Google</p>
+        </div></button>
+     */}
       <br />
       <div className="newtokeeper">
         <p className="y">New to Keeper?</p>
@@ -52,6 +72,8 @@ function Login(props) {
         </Link>
       </div>
     </div>
+    <Footer/>
+     </div>
   );
 }
 
