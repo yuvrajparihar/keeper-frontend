@@ -78,7 +78,7 @@ function Home() {
   // console.log(state)
   return (
     <div>
-       <Header loggedIn={logState} />
+       <Header/>
       <CreateArea onAdd={addNote} />
 
       {state.map((noteItem, index) => {
