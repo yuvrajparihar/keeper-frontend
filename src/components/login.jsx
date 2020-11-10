@@ -3,7 +3,7 @@ import { NavLink as Link,useHistory} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
-function Login(props) {
+function Login() {
   
   const [user, setNote] = useState({
     username: "",
@@ -59,11 +59,6 @@ function Login(props) {
           <p className="x bold"> Google</p>
         </div></a>
 
-       {/* <button className="google">  <div>
-          <img className="x" src="google.png" alt="GOOGLE" />
-          <p className="x bold"> Google</p>
-        </div></button>
-     */}
       <br />
       <div className="newtokeeper">
         <p className="y">New to Keeper?</p>
@@ -79,12 +74,3 @@ function Login(props) {
 
 export default Login;
 
-{
-  /* <Link to='/'> <img 
-            className="header__logo"
-            src='http://pngimg.com/uploads/amazon/amazon_PNG11.png'
-            alt=''
-            >
-            </img>
-            </Link> */
-}

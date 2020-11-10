@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import queryString from "query-string";
@@ -19,7 +19,7 @@ function Home() {
       history.push("/home");
     }
    
-  }, []);
+  }, [history]);
   
   useEffect(() => {
     const token = window.sessionStorage.getItem("jwtToken");
@@ -40,7 +40,7 @@ function Home() {
           setstate(data);
         }
       });
-  }, []);
+  }, [history]);
   // console.log(state)
   function deleteNote(id) {
     const token = window.sessionStorage.getItem("jwtToken");
@@ -74,7 +74,7 @@ function Home() {
         setstate(data)
       });
   }
-  const [logState,uselogState] = useState("yes");
+ 
   // console.log(state)
   return (
     <div>

@@ -1,9 +1,9 @@
 import React, {useState} from "react"
-import{ NavLink as Link, useHistory} from "react-router-dom"
+import{ useHistory} from "react-router-dom"
 import Header from "./Header";
 import Footer from "./Footer";
 
-function Signup(props){
+function Signup(){
   const history = useHistory();
   const [user, setNote] = useState({
     username: "",
@@ -53,9 +53,7 @@ function Signup(props){
   
   }
   
-  function googleAuth(){
-
-  }
+  
   
     return ( 
      <div>
@@ -90,11 +88,3 @@ function Signup(props){
 export default Signup;
 
 
-
-{/* <Link to='/'> <img 
-            className="header__logo"
-            src='http://pngimg.com/uploads/amazon/amazon_PNG11.png'
-            alt=''
-            >
-            </img>
-            </Link> */}
