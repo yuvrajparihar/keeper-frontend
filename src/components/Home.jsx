@@ -14,7 +14,7 @@ function Home() {
   useEffect(() => {
     const token = window.sessionStorage.getItem("jwtToken");
     const accessToken = "Bearer " + token;
-    fetch("http://localhost:5000/", {
+    fetch("https://my-keeper-server.herokuapp.com/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -35,7 +35,7 @@ function Home() {
   function deleteNote(id) {
     const token = window.sessionStorage.getItem("jwtToken");
     const accessToken = "Bearer " + token;
-    fetch("http://localhost:5000/delete", {
+    fetch("https://my-keeper-server.herokuapp.com/delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -51,7 +51,7 @@ function Home() {
   function addNote(newNote) {
     const token = window.sessionStorage.getItem("jwtToken");
     const accessToken = "Bearer " + token;
-    fetch("http://localhost:5000/add", {
+    fetch("https://my-keeper-server.herokuapp.com/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",

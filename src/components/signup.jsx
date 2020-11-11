@@ -27,7 +27,7 @@ function Signup(){
    
     event.preventDefault();
    if(user.password===user.confirmPassword){
-    fetch("http://localhost:5000/register", {
+    fetch("https://my-keeper-server.herokuapp.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -70,7 +70,7 @@ function Signup(){
          <button onClick={signUp} className="button signupbutton" >Sign Up</button>
          <p className="or">or</p>
 
-         <a className="google" href="http://localhost:5000/auth/google"><div>
+         <a className="google" href="https://my-keeper-server.herokuapp.com/auth/google"><div>
           <img className="x" src="google.png" alt="GOOGLE" />
           <p className="x bold"> Google</p>
         </div></a>
