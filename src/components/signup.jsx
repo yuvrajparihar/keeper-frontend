@@ -63,7 +63,7 @@ function Signup(){
               Sign Up
          </h3>
        <form>
-         <input  name="username" onChange={handleChange} className="input" type="email" placeholder="Email" />
+         <input  name="username" onClick={()=>{setPass("")}}  onChange={handleChange} className="input" type="email" placeholder="Email" />
          <input  name="password" onClick={()=>{setPass("")}} onChange={handleChange} className="input" type="password" placeholder="Password" />
          <input  name="confirmPassword" onClick={()=>{setPass("")}} onChange={handleChange} className="input confirm" type="password" placeholder="Confirm Password" />
          <p className="match">{matchPass}</p>

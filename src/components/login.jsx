@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { NavLink as Link,useHistory} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import queryString from "query-string";
 
 function Login() {
-  
+  const history = useHistory();
+  useEffect(() => {
+    var query = queryString.parse(window.location.search);
+    console.log(query.token);
+    if(query.token){
+      const accessToken = query.token;
+      window.sessionStorage.setItem("jwtToken",accessToken);
+      
+      history.push("/home");
+    }
+   
+  },[history]);
+  const [check,setCheck]= useState("");
   const [user, setNote] = useState({
     username: "",
     password: ""
@@ -20,7 +33,7 @@ function Login() {
       };
     });
   }
-  const history = useHistory();
+  
 
   function signIn(event) {
 
@@ -34,9 +47,17 @@ function Login() {
     })
       .then((response) => response.json())
       .then((data) => {
-        const accessToken = data.token;
+        if(data.token){
+          const accessToken = data.token;
          window.sessionStorage.setItem("jwtToken",accessToken);
         history.push("/home");
+        }
+        else if(data.response==="wrong"){
+          setCheck("Wrong password");
+        }
+        else if(data.response==="notRegistered"){
+            setCheck("User not registered");
+        }
       });
   }
 
@@ -48,9 +69,10 @@ function Login() {
     <div className="signin">
       <h3 className="sign">Sign In</h3>
       <form>
-        <input name="username" onChange={handleChange} className="input" type="email" placeholder="Email" />
-        <input name="password" onChange={handleChange} className="input" type="password" placeholder="Password" />
-        <button onClick={signIn} className="button">Sign In</button>
+        <input name="username" onClick={()=>{setCheck("")}} onChange={handleChange} className="input" type="email" placeholder="Email" />
+        <input name="password" onClick={()=>{setCheck("")}} onChange={handleChange} className="input confirm" type="password" placeholder="Password" />
+        <p className="match">{check}</p>
+        <button onClick={signIn} className="button signupbutton">Sign In</button>
       </form>
       <p className="or">or</p>
 

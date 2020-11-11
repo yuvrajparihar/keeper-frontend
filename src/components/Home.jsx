@@ -4,22 +4,12 @@ import CreateArea from "./CreateArea";
 import { useHistory} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import queryString from "query-string";
+
 
 function Home() {
   const history = useHistory();
   const [state, setstate] = useState([{ _id:"",title: "", content: "" }]);
-  useEffect(() => {
-    var query = queryString.parse(window.location.search);
-    console.log(query.token);
-    if(query.token){
-      const accessToken = query.token;
-      window.sessionStorage.setItem("jwtToken",accessToken);
-      
-      history.push("/home");
-    }
-   
-  }, [history]);
+ 
   
   useEffect(() => {
     const token = window.sessionStorage.getItem("jwtToken");
