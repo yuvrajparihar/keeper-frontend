@@ -1,22 +1,11 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink as Link,useHistory} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import queryString from "query-string";
 
 function Login() {
   const history = useHistory();
-  useEffect(() => {
-    var query = queryString.parse(window.location.search);
-    console.log(query.token);
-    if(query.token){
-      const accessToken = query.token;
-      window.sessionStorage.setItem("jwtToken",accessToken);
-      
-      history.push("/home");
-    }
-   
-  },[history]);
+ 
   const [check,setCheck]= useState("");
   const [user, setNote] = useState({
     username: "",
