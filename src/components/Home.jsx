@@ -7,7 +7,8 @@ import Footer from "./Footer";
 import queryString from "query-string";
 
 
-
+var url="https://my-keeper-server.herokuapp.com/"
+// var url="http://localhost:5000/"
 function Home() {
   const history = useHistory();
   const [state, setstate] = useState([{ _id:"",title: "", content: "" }]);
@@ -26,7 +27,7 @@ function Home() {
   useEffect(() => {
     const token = window.sessionStorage.getItem("jwtToken");
     const accessToken = "Bearer " + token;
-    fetch("https://my-keeper-server.herokuapp.com/", {
+    fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -47,7 +48,7 @@ function Home() {
   function deleteNote(id) {
     const token = window.sessionStorage.getItem("jwtToken");
     const accessToken = "Bearer " + token;
-    fetch("https://my-keeper-server.herokuapp.com/delete", {
+    fetch(url+"delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -63,7 +64,7 @@ function Home() {
   function addNote(newNote) {
     const token = window.sessionStorage.getItem("jwtToken");
     const accessToken = "Bearer " + token;
-    fetch("https://my-keeper-server.herokuapp.com/add", {
+    fetch(url+"add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",

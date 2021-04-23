@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { NavLink as Link,useHistory} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import validator from 'validator'
 
+var url="https://my-keeper-server.herokuapp.com/"
+// var url="http://localhost:5000/"
 function Login() {
   const history = useHistory();
  
@@ -27,27 +30,32 @@ function Login() {
   function signIn(event) {
 
     event.preventDefault();
-    fetch("https://my-keeper-server.herokuapp.com/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({ email: user.username, password: user.password }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if(data.token){
-          const accessToken = data.token;
-         window.sessionStorage.setItem("jwtToken",accessToken);
-        history.push("/home");
-        }
-        else if(data.response==="wrong"){
-          setCheck("Wrong password");
-        }
-        else if(data.response==="notRegistered"){
-            setCheck("User not registered");
-        }
-      });
+    if(validator.isEmail(user.username)){
+      fetch(url+"login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({ email: user.username, password: user.password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if(data.token){
+            const accessToken = data.token;
+           window.sessionStorage.setItem("jwtToken",accessToken);
+          history.push("/home");
+          }
+          else if(data.response==="wrong"){
+            setCheck("Wrong password");
+          }
+          else if(data.response==="notRegistered"){
+              setCheck("User not registered");
+          }
+        });
+    }
+    else{
+      setCheck("Enter valid email address");
+    }
   }
 
  

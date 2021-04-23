@@ -2,6 +2,11 @@ import React, {useState} from "react"
 import{ useHistory} from "react-router-dom"
 import Header from "./Header";
 import Footer from "./Footer";
+import validator from 'validator'
+// var validator = require("validator")
+
+var url="https://my-keeper-server.herokuapp.com/"
+// var url="http://localhost:5000/"
 
 function Signup(){
   const history = useHistory();
@@ -26,29 +31,41 @@ function Signup(){
   function signUp(event) {
    
     event.preventDefault();
-   if(user.password===user.confirmPassword){
-    fetch("https://my-keeper-server.herokuapp.com/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({ email: user.username, password: user.password }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if(data.response){
-          setPass("User is already registered");
-        }
-        else{
-          const accessToken = data.token;
-          window.sessionStorage.setItem("jwtToken",accessToken);
-         history.push("/home");
-        }
-      });
-   }
-   else{
-     setPass("Password doesn't match");
-   }
+    if(validator.isEmail(user.username)){
+      if(user.password.length>5)
+      {
+        if(user.password===user.confirmPassword){
+        fetch(url+"register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          body: JSON.stringify({ email: user.username, password: user.password }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if(data.response){
+              setPass("User is already registered");
+            }
+            else{
+              const accessToken = data.token;
+              window.sessionStorage.setItem("jwtToken",accessToken);
+             history.push("/home");
+            }
+          });
+       }
+       else{
+         setPass("Password doesn't match");
+       }
+    }
+    else{
+      setPass("Password should contain atleast 6 letters");
+    }
+  }
+    else{
+      setPass("Enter valid email address");
+    }
+   
 
   
   }
